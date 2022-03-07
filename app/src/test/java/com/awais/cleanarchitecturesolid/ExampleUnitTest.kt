@@ -1,4 +1,4 @@
-package com.example.cleanarchitecturesolid
+package com.awais.cleanarchitecturesolid
 
 import org.junit.Test
 
