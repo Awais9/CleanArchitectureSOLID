@@ -2,10 +2,7 @@ package com.awais.cleanarchitecturesolid.framework.di.modules
 
 import com.awais.cleanarchitecturesolid.framework.UseCases
 import com.awais.core.repository.NoteRepository
-import com.awais.core.usecase.AddNote
-import com.awais.core.usecase.GetAllNotes
-import com.awais.core.usecase.GetNote
-import com.awais.core.usecase.RemoveNote
+import com.awais.core.usecase.*
 import dagger.Module
 import dagger.Provides
 
@@ -17,6 +14,7 @@ class UseCasesModule {
         AddNote(repository),
         GetAllNotes(repository),
         GetNote(repository),
-        RemoveNote(repository)
+        RemoveNote(repository),
+        GetWordCount()
     )
 }

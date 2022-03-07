@@ -28,6 +28,7 @@ class NoteListViewModel(application: Application) : AndroidViewModel(application
         loading.value = true
         viewModelScope.launch {
             val notes = useCases.getAllNotes.invoke()
+            notes.forEach { it.wordCount = useCases.getWordCount.invoke(it) }
             allNotes.value = notes
             loading.value = false
         }
