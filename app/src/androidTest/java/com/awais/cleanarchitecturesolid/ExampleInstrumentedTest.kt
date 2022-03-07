@@ -1,4 +1,4 @@
-package com.example.cleanarchitecturesolid
+package com.awais.cleanarchitecturesolid
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4
