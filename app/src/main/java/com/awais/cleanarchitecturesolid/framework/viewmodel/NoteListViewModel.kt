@@ -4,25 +4,21 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.awais.cleanarchitecturesolid.framework.RoomNoteDataSource
 import com.awais.cleanarchitecturesolid.framework.UseCases
+import com.awais.cleanarchitecturesolid.framework.di.components.DaggerViewModelComponent
+import com.awais.cleanarchitecturesolid.framework.di.modules.ApplicationModule
 import com.awais.core.data.Note
-import com.awais.core.repository.NoteRepository
-import com.awais.core.usecase.AddNote
-import com.awais.core.usecase.GetAllNotes
-import com.awais.core.usecase.GetNote
-import com.awais.core.usecase.RemoveNote
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 class NoteListViewModel(application: Application) : AndroidViewModel(application) {
-    private val repository by lazy { NoteRepository(RoomNoteDataSource(application)) }
-    private val useCases by lazy {
-        UseCases(
-            AddNote(repository),
-            GetAllNotes(repository), GetNote(repository), RemoveNote(repository)
-        )
+
+    @Inject
+    lateinit var useCases: UseCases
+
+    init {
+        DaggerViewModelComponent.builder().applicationModule(ApplicationModule(getApplication()))
+            .build().inject(this)
     }
 
     val loading by lazy { MutableLiveData<Boolean>() }
@@ -32,6 +28,7 @@ class NoteListViewModel(application: Application) : AndroidViewModel(application
         loading.value = true
         viewModelScope.launch {
             val notes = useCases.getAllNotes.invoke()
+            notes.forEach { it.wordCount = useCases.getWordCount.invoke(it) }
             allNotes.value = notes
             loading.value = false
         }

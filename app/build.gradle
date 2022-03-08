@@ -55,12 +55,13 @@ dependencies {
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutines_version"
 
     implementation "androidx.room:room-runtime:$room_version"
-//    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     kapt "androidx.room:room-compiler:$room_version"
     implementation "androidx.room:room-ktx:$room_version"
 
-    implementation "com.google.dagger:dagger:$daggerVersion"
-    implementation "com.google.dagger:dagger-android-support:$daggerVersion"
-    kapt "com.google.dagger:dagger-compiler:$daggerVersion"
-    kapt "com.google.dagger:dagger-android-processor:$daggerVersion"
+//    implementation "com.google.dagger:dagger:$daggerVersion"
+//    implementation "com.google.dagger:dagger-android-support:$daggerVersion"
+//    kapt "com.google.dagger:dagger-compiler:$daggerVersion"
+//    kapt "com.google.dagger:dagger-android-processor:$daggerVersion"
+    implementation "com.google.dagger:dagger:$dagger_version"
+    kapt "com.google.dagger:dagger-compiler:$dagger_version"
 }

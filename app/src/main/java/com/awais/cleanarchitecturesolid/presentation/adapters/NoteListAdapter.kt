@@ -39,6 +39,7 @@ class NoteListAdapter(private val listener: NoteClickListener) :
         private val noteDate = view.date
         private val layout = view.noteLayout
         private val delete = view.deleteIV
+        private val wordCount = view.wordCountTV
 
         fun bind(note: Note, listener: NoteClickListener) {
             title.text = note.title
@@ -46,6 +47,7 @@ class NoteListAdapter(private val listener: NoteClickListener) :
             val sdf = SimpleDateFormat("MMM dd, HH:mm:ss")
             val resultDate = Date(note.updateTime)
             noteDate.text = "Last update: ${sdf.format(resultDate)}"
+            wordCount.text = "Words: ${note.wordCount}"
 
             layout.setOnClickListener {
                 listener.onClick(note)

@@ -49,10 +49,21 @@
         <TextView
             android:id="@+id/date"
             style="@style/detail"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="Last updated"
-            app:layout_constraintBottom_toBottomOf="parent" />
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/wordCountTV"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/wordCountTV"
+            style="@style/detail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Count"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
