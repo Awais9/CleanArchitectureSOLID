@@ -1,17 +1,21 @@
 package com.awais.cleanarchitecturesolid.presentation
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.LayoutInflater
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.navigation.ui.NavigationUI
+import com.awais.cleanarchitecturesolid.presentation.base.BaseActivity
 import com.example.cleanarchitecturesolid.R
+import com.example.cleanarchitecturesolid.databinding.ActivityMainBinding
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : BaseActivity<ActivityMainBinding>() {
+    override val bindingInflater: (LayoutInflater) -> ActivityMainBinding
+        get() = ActivityMainBinding::inflate
     private lateinit var navController: NavController
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(binding.root)
         navController = Navigation.findNavController(this, R.id.fragmentContainerView)
 
         NavigationUI.setupActionBarWithNavController(this, navController)
@@ -20,4 +24,5 @@ class MainActivity : AppCompatActivity() {
     override fun onSupportNavigateUp(): Boolean {
         return NavigationUI.navigateUp(navController, null)
     }
+
 }

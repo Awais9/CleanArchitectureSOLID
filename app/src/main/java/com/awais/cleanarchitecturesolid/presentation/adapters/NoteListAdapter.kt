@@ -1,14 +1,12 @@
 package com.awais.cleanarchitecturesolid.presentation.adapters
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.RecyclerView
 import com.awais.cleanarchitecturesolid.presentation.interfaces.NoteClickListener
 import com.awais.core.data.Note
 import com.example.cleanarchitecturesolid.R
-import kotlinx.android.synthetic.main.note_item_view.view.*
+import com.example.cleanarchitecturesolid.databinding.NoteItemViewBinding
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -22,10 +20,11 @@ class NoteListAdapter(private val listener: NoteClickListener) :
         notifyDataSetChanged()
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NoteViewHolder =
-        NoteViewHolder(
-            LayoutInflater.from(parent.context).inflate(R.layout.note_item_view, parent, false)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NoteViewHolder {
+        return NoteViewHolder(
+            NoteItemViewBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         )
+    }
 
     override fun onBindViewHolder(holder: NoteViewHolder, position: Int) {
         holder.bind(notes[holder.layoutPosition], listener)
@@ -33,13 +32,13 @@ class NoteListAdapter(private val listener: NoteClickListener) :
 
     override fun getItemCount(): Int = notes.size
 
-    class NoteViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        private val title = view.title
-        private val content = view.content
-        private val noteDate = view.date
-        private val layout = view.noteLayout
-        private val delete = view.deleteIV
-        private val wordCount = view.wordCountTV
+    class NoteViewHolder(binding: NoteItemViewBinding) : RecyclerView.ViewHolder(binding.root) {
+        private val title = binding.title
+        private val content = binding.content
+        private val noteDate = binding.date
+        private val layout = binding.noteLayout
+        private val delete = binding.deleteIV
+        private val wordCount = binding.wordCountTV
 
         fun bind(note: Note, listener: NoteClickListener) {
             title.text = note.title
