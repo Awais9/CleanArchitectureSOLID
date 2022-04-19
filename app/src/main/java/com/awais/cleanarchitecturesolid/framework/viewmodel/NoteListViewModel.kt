@@ -40,4 +40,12 @@ class NoteListViewModel(application: Application) : AndroidViewModel(application
             getAllNotes()
         }
     }
+
+    fun deleteAllNotes() {
+        loading.value = true
+        viewModelScope.launch {
+            useCases.deleteAllNote.invoke()
+            getAllNotes()
+        }
+    }
 }
