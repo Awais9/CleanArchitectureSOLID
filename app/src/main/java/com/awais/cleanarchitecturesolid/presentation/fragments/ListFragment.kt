@@ -42,6 +42,9 @@ class ListFragment : BaseFragment<FragmentListBinding>() {
                 adapter = noteListAdapter
             }
             addNoteFB.setOnClickListener { gotoNoteDetail() }
+            deleteButton.setOnClickListener {
+                viewModel.deleteAllNotes()
+            }
         }
         observeViewModel()
     }
@@ -60,6 +63,11 @@ class ListFragment : BaseFragment<FragmentListBinding>() {
                 }
             }
             viewModel.allNotes.observe(viewLifecycleOwner) { list ->
+                if (list.isNullOrEmpty()) {
+                    binding.deleteButton.visibility = View.GONE
+                } else {
+                    binding.deleteButton.visibility = View.VISIBLE
+                }
                 noteListAdapter.setNotes(list.sortedByDescending { it.updateTime })
             }
         }
